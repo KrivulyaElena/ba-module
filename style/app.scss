@@ -1,0 +1,95 @@
+// variables
+$mainColor: #000;
+$mainBackground: #fff;
+
+$container: 1100px;
+$colGups: 15px;
+
+$textFont-size: 1rem; // 16px
+$linkColor: blue;
+
+$subTitleColor: #555555;
+
+$breakpoints: (
+  xs: 0,
+  sm: 575px,
+  md: 768px,
+  lg: 1025px,
+  xl: 1200px,
+  xxl: 1440px
+);
+
+//===========  mixins start ===========//
+
+// columns
+$columns: 12;
+$col: $columns;
+
+@mixin col($col, $columns) {
+  width: percentage($col/$columns);
+  padding: 0 $colGups;
+}
+
+//===========  mixins end ===========//
+
+@mixin col-create() {
+  @while $col > 0 {
+    .col-#{$col} {
+      @include col($col, $columns);
+    }
+
+    $col: $col - 1;
+  }
+}
+
+
+.container {
+  max-width: $container;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+// layout
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$colGups;
+  margin-left: -$colGups;
+}
+
+[class^="col"] {
+  padding-left: $colGups;
+  padding-right: $colGups;
+  width: 100%;
+  min-height: 1px;
+}
+
+@include col-create() .ba-section {
+  padding-bottom: 100px;
+}
+
+
+// main styles
+
+body {
+  font-family: "Aleo", serif;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1rem;
+}
+
+//buttons
+a,
+button {
+  transition: 0.3s ease-in;
+  transition-property: color, background-color, opacity;
+  svg {
+    fill: currentColor;
+  }
+}
+
+button,
+.button {
+  cursor: pointer;
+}
